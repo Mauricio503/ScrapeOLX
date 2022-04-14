@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { getAPIClient } from "../services/axios";
 import { useContext, useEffect, useState } from "react";
 import Oval from "react-loading-icons/dist/components/oval";
-import { BotContext } from "../contexts/BotContext";
+import { BotContext, DataBot } from "../contexts/BotContext";
 import Head from "next/head";
 
 function Home() {
@@ -16,6 +16,7 @@ function Home() {
     },[clickExecute]);
 
     async function handleSignIn(data) {
+        data.time = parseInt(data.time);
         setClickExecute(true);
         execute(data).then((resp) => {
             resp ?
@@ -23,8 +24,14 @@ function Home() {
             :
                 setMessage("Erro ao executar")
             setClickExecute(false);
+            cleanMessage();
         });
+    }
 
+    function cleanMessage(){
+        setTimeout(() => {
+            setMessage("");
+        }, 30000);
     }
 
 

@@ -2,11 +2,11 @@ import { createContext } from "react";
 
 import { api } from "../services/api";
 
-type DataBot = {
+export type DataBot = {
   search: string;
   state: string;
   region: string;
-  time: string;
+  time: Number;
 }
 
 type BotContextType = {
@@ -17,6 +17,7 @@ export const BotContext = createContext({} as BotContextType)
 
 export function BotProvider({ children }) {
   async function execute(data:DataBot) {
+      console.log(data);
     return api.post('/scrape',data).then(() => {
         return true;
     }).catch(error => {

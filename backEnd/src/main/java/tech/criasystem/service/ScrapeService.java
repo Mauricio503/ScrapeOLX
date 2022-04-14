@@ -2,6 +2,7 @@ package tech.criasystem.service;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,18 +17,19 @@ import com.gargoylesoftware.htmlunit.html.HtmlHeading2;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlSpan;
 
+import tech.criasystem.dto.req.ScrapeDTO;
 import tech.criasystem.model.Product;
 
 @Service
 public class ScrapeService {
 
-	public List<Product> executeScrape() throws FailingHttpStatusCodeException, MalformedURLException, IOException {
+	public List<Product> executeScrape(ScrapeDTO dto) throws FailingHttpStatusCodeException, MalformedURLException, IOException {
 		WebClient client = new WebClient();
 		client.getOptions().setCssEnabled(false);
 		client.getOptions().setJavaScriptEnabled(false);
 		List<Product> products = new ArrayList<Product>();
 		for(int page=1;page<=3;page++) {
-			String searchUrl = "https://go.olx.com.br/grande-goiania-e-anapolis?o="+page+"&q=Iphone%2011&sp=2";
+			String searchUrl = "https://"+dto.getState()+".olx.com.br/"+dto.getRegion()+"?o="+page+"&q="+URLEncoder.encode(dto.getSearch(), "UTF-8")+"&sp=2";
 			filter(searchUrl,client,products);
 		}
 		client.close();

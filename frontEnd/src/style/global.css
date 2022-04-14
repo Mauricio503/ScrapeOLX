@@ -1,0 +1,324 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Ubuntu', sans-serif;
+}
+:root {
+    --dark: rgb(31 41 55);
+    --blue: #287bff;
+    --white: #fff;
+    --grey: #f5f5f5;
+    --black1: #222;
+    --black2: #999;
+    --green-weak: #56af62;
+    --strong-green: #139c26;
+}
+body {
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+.container {
+    position: relative;
+    width: 100%;
+}
+.navigation {
+    position: fixed;
+    width: 300px;
+    height: 100%;
+    background: var(--green-weak);
+    border-left: 10px solid var(--green-weak);
+    transition: 0.5%;
+    overflow: hidden;
+}
+
+.navigation.active {
+    width: 80px;
+}
+
+.navigation ul {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.navigation ul li {
+    position: relative;
+    width: 100%;
+    list-style: none;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+}
+
+.navigation ul li.hovered {
+    background: var(--white);
+}
+
+.navigation ul li.hovered-dark {
+    background: var(--dark);
+}
+
+.navigation ul li:nth-child(1) {
+    margin-bottom: 40px;
+    pointer-events: none;
+}
+.navigation ul li a {
+    position: relative;
+    display: block;
+    width: 100%;
+    display: flex;
+    text-decoration: none;
+    color: var(--white);
+}
+
+.navigation ul li:hover a,
+.navigation ul li.hovered a {
+    color: var(--green-weak);
+}
+
+.navigation ul li a .icon {
+    position: relative;
+    display: block;
+    min-width: 60px;
+    height: 60px;
+    line-height: 70px;
+    text-align: center;
+}
+
+.navigation ul li a .title {
+    position: relative;
+    display: block;
+    padding: 0 10px;
+    height: 60px;
+    line-height: 60px;
+    text-align: start;
+    white-space: nowrap;
+}
+.navigation ul li a .icon svg {
+    margin-left: 10px;
+    margin-top: 15px;
+}
+.navigation ul li:hover a::before,
+.navigation ul li.hovered a::before {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: -50px;
+    width: 50px;
+    height: 50px;
+    background: transparent;
+    border-radius: 50%;
+    box-shadow: 35px 35px 0 10px var(--white);
+    pointer-events: none;
+}
+
+.navigation ul li.hovered-dark a::before {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: -50px;
+    width: 50px;
+    height: 50px;
+    background: transparent;
+    border-radius: 50%;
+    box-shadow: 35px 35px 0 10px var(--dark);
+    pointer-events: none;
+}
+
+.navigation ul li:hover a::after,
+.navigation ul li.hovered a::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: -50px;
+    width: 50px;
+    height: 50px;
+    background: transparent;
+    border-radius: 50%;
+    box-shadow: 35px -35px 0 10px var(--white);
+    pointer-events: none;
+}
+.navigation ul li.hovered-dark a::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: -50px;
+    width: 50px;
+    height: 50px;
+    background: transparent;
+    border-radius: 50%;
+    box-shadow: 35px -35px 0 10px var(--dark);
+    pointer-events: none;
+}
+
+.main {
+    position: relative;
+    width: calc(100% - 300px);
+    margin: calc(100%-500px);
+    left: 300px;
+    background: var(--white);
+    transition: 0.5%;
+}
+
+@media (min-width: 1024px) {
+    .main {
+        padding: 2% 10% 2% 10%;
+    }
+}
+
+.main.active {
+    width: calc(100% - 80px);
+    left: 80px;
+}
+.topbar {
+    position: relative;
+    width: calc(100% - 300px);
+    left: 300px;
+    background: var(--white);
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+}
+.topbar.active {
+    width: calc(100% - 80px);
+    left: 80px;
+}
+.toggle {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5em;
+    cursor: pointer;
+}
+.search {
+    position: relative;
+    width: 400px;
+    margin: 0 10px;
+}
+
+.search label {
+    position: relative;
+    width: 100%;
+}
+.search label input {
+    width: 100%;
+    height: 40px;
+    border-radius: 40px;
+    padding: 5px 20px;
+    padding-left: 35px;
+    font-size: 18px;
+    outline: none;
+    border: 1px solid var(--black2);
+}
+.search label svg {
+    position: absolute;
+    top: 0;
+    left: 10px;
+    font-size: 1.2em;
+}
+.user {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+}
+.user img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.card {
+    display: flex;
+    background: linear-gradient(
+        to left top,
+        rgba(255, 255, 255, 0.8),
+        rgb(255, 255, 255, 0.5)
+    );
+    border-radius: 1rem;
+    margin: 2rem 0rem;
+    padding: 2rem;
+    box-shadow: 6px 6px 20px rgba(122, 122, 122, 0.2);
+}
+
+@keyframes fa-blink {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+.fa-blink {
+    -webkit-animation: fa-blink 1s linear infinite;
+    -moz-animation: fa-blink 1s linear infinite;
+    -ms-animation: fa-blink 1s linear infinite;
+    -o-animation: fa-blink 1s linear infinite;
+    animation: fa-blink 1s linear infinite;
+}
+#circleYellow {
+    height: 15px;
+    width: 15px;
+    margin-top: 5px;
+    background-color: #ffff00;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+@font-face {
+    font-family: 'Edosz';
+    src: url('/fonts/edosz/edosz.ttf');
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Edosz';
+    src: url('/fonts/edosz/edosz.ttf');
+    font-style: medium;
+    font-weight: 500;
+    font-display: swap;
+}
+@media (min-width: 1024px) {
+    .title-menu-personalised {
+        font-family: Edosz;
+        font-size: 50px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .title-menu-personalised {
+        display: none;
+    }
+}
+@media (min-width: 1024px) {
+    #chat-operator {
+        height: 770px;
+    }
+}
+
+@media (min-width: 800px) {
+    #chat-operator {
+        height: 680px;
+    }
+}
+.button-green {
+    background: var(--strong-green)!important;
+}
+.button-green:hover {
+    background: var(--green-weak)!important;
+}

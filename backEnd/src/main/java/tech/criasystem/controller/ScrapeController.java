@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +18,8 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 
+import org.springframework.web.bind.annotation.RequestBody;
+import tech.criasystem.dto.req.ScrapeDTO;
 import tech.criasystem.model.Product;
 import tech.criasystem.service.ScrapeService;
 import tech.criasystem.service.TelegramService;
@@ -36,8 +40,8 @@ public class ScrapeController {
 	
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping
-	public void index(/*@Valid @RequestBody PostReqDTO dto*/) throws TelegramApiException, FailingHttpStatusCodeException, MalformedURLException, IOException {
-		List<Product> products = scrapeService.executeScrape();
+	public void index(@Valid @RequestBody ScrapeDTO dto) throws TelegramApiException, FailingHttpStatusCodeException, MalformedURLException, IOException {
+		List<Product> products = scrapeService.executeScrape(dto);
 		File file = writeFileCSVProductService.filterAndCreateCSV(products);	
 		telegramService.sendFile(file);
 	}

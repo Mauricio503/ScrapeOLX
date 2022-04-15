@@ -11,6 +11,7 @@ import org.telegram.telegrambots.meta.api.methods.send.SendDocument;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.InputFile;
 import org.telegram.telegrambots.meta.api.objects.Update;
+import org.telegram.telegrambots.meta.api.objects.WebhookInfo;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 @ApplicationScope
@@ -39,6 +40,10 @@ public class TelegramBot extends TelegramLongPollingBot{
 	        
 	    }
 
+	public WebhookInfo getInfoWebhook() throws TelegramApiException {
+		return getWebhookInfo();
+	}
+	
 	public void sendDocUploadingAFile(InputFile file) throws TelegramApiException {
 
 	    SendDocument send = SendDocument.builder()
